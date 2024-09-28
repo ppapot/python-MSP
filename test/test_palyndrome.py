@@ -1,17 +1,23 @@
-import  python.src.palyndrome as p
+from  src.palyndrome import ispalyndrome
 
 def test_good():
-    assert p.ispalyndrome("") == True
-    assert p.ispalyndrome("a") == True
-    assert p.ispalyndrome("aba") == True
-    assert p.ispalyndrome("aA") == True
-    assert p.ispalyndrome(" a a") == True
-    assert p.ispalyndrome("abccba") == True
+    """
+    Test good palyndrome
+    """
+    assert ispalyndrome("") == True
+    assert ispalyndrome("a") == True
+    assert ispalyndrome("aba") == True
+    assert ispalyndrome("aA") == True
+    assert ispalyndrome(" a a") == True
+    assert ispalyndrome("abccba") == True
    
 def test_bad():
-    assert p.ispalyndrome("ab") == False
-    assert p.ispalyndrome("abc") == False
-    assert p.ispalyndrome("abcdba") == False
+    """
+    Test bad palyndrome
+    """
+    assert ispalyndrome("ab") == False
+    assert ispalyndrome("abc") == False
+    assert ispalyndrome("abcdba") == False
 
     
        
