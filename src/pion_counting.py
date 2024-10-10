@@ -23,11 +23,11 @@ def average_nb_pions(a,b):
 # create a loop to prevent the code to crach when the user enter a wrong input file
 try:
     
-    directory= input("enter your file path")
+    #directory= input("enter your file path")
     
-    if directory == "":
-        directory = "/../data"
-        
+    #if directory == "":
+    directory = "data"
+
             
     # Iterate over each file in the directory
     for filename in os.listdir(directory):
@@ -39,50 +39,48 @@ try:
             with open(file_path, 'r') as file:
             
             
-                #defining the diferent variables 
+                #defining the different variables 
                 total_nb_positive_pions=0
                 total_events=0
                 total_events_empty=0
                 total_nb_negative_pions=0
         
                 # create a loop for repeating the process for each line 
-                for line in file:
-                    
-                    
-                    # defining each column of the file as different variables  
-                    columns = line.split(" ") #the colulums are separated by " "
-                    
-                    #this is a condition that will only select the line of data that have 4 columns
-                    if len(columns) == 4:
-                        
-                        #Defining each column
-                        px = float(columns[0])
-                        py = float(columns[1])
-                        pz =  float(columns[2])
-                        pg = int(columns[3])
-                        
-                        #I am here focusing on the pions particle. So I add this condition to only count the amount of pions particle. 
-                        #this is for positive pions
-                        if pg == 211:
-                            total_nb_positive_pions += 1
-                        
-                        #this is for negative pions
-                        elif pg == -211:
-                            total_nb_negative_pions += 1
-                        
-                    # if the line doesn't have 4 columns it means it's the line of a new event.
-                    #so this count the total amount of event.    
-                    # If the line doesn't have 4 columns
-                        elif len(columns) == 2 and columns[1] == '0':
-                        # This is a special ending line with any number followed by '0', don't count it as a new event
-                            total_events_empty += 1
-        
-                         # Count valid events
-                        elif len(columns) == 2:
-                            # Assuming valid events have 2 columns
-                            total_events += 1
-            
-                 #this aply the function to calculate the average amount of positive and negative pions per event per file. 
+                while True:
+                    line = file.readline()
+                    if not line: break
+                    else : 
+                        columns = line.split(" ")
+                        if len(columns) == 2 : #ths is a event line
+                            if columns[1] == '0': #this is a non event
+                                total_events_empty += 1
+                            else : #this is a event with potential pions 
+                                
+                                nb_negative_pions_in_event = 0
+                                nb_positive_pions_in_event = 0
+                                for i in range(int(columns[1])):
+                                    line_record = file.readline()
+                                    if not line_record: break
+                                    else :  # this is a particle line of  in the event
+                                        columns_record = line_record.split(" ")
+                                        px = float(columns_record[0])
+                                        py = float(columns_record[1])
+                                        pz =  float(columns_record[2])
+                                        pg = int(columns_record[3])
+                                        if pg == 211: #this is for positive pions
+                                            nb_positive_pions_in_event += 1
+                                            total_nb_positive_pions += 1
+                            
+                                        elif pg == -211: #this is for negative pions
+                                            nb_negative_pions_in_event += 1
+                                            total_nb_negative_pions += 1
+
+                                if nb_positive_pions_in_event == 0 and nb_negative_pions_in_event == 0 :
+                                    total_events_empty += 1
+                                else:
+                                    total_events += 1
+
+                 #this apply the function to calculate the average amount of positive and negative pions per event per file. 
                 average_positive_pions= average_nb_pions (total_nb_positive_pions, total_events)
                 average_negative_pions= average_nb_pions (total_nb_negative_pions, total_events)
                 
@@ -110,7 +108,8 @@ try:
         weighted_average_positive = np.sum(averages_positive * nb_events) / np.sum(nb_events)
         weighted_average_negative = np.sum(averages_negative * nb_events) / np.sum(nb_events)
     
-        average_mean_difference= weighted_average_positive - weighted_average_negative
+        average_mean_difference = np.sum(mean_diff * nb_events) /np.sum(nb_events)
+        
         
         uncertainties_positive = np.std(averages_positive, ddof=1)
         uncertainties_negative = np.std(averages_negative, ddof=1)
@@ -122,7 +121,13 @@ try:
         print(f"Uncertainty (Positive Pions): {uncertainties_positive}")
         print(f"Uncertainty (Negative Pions): {uncertainties_negative}")
         print(f"Uncertainty (Difference of Means): {uncertainties_difference}")
-        
+
+        # Calculate the range of the mean difference
+        lower_bound = average_mean_difference - uncertainties_difference
+        upper_bound = average_mean_difference + uncertainties_difference
+
+        print(f"Range of the mean difference: ({lower_bound}, {upper_bound})")
+        print(mean_diff)
     
     else:
         print("there are no events in the file")
@@ -138,3 +143,4 @@ except Exception as e: #this for unexpected error
     print(f"An unexpected error occurred: {e}. Please check your file path and try again.")
  
 
+print(f"Program finished")
