@@ -1,0 +1,38 @@
+\section*{Analysis details}
+%No more than half a page including tables or/and figures
+
+As mentioned in the introduction, the data used for this analysis was gathered from PYTHIA. The dataset consists of 10 files of each 500000 events, which contain the recorded momentum of each particle produced by the proton-protn collision in the x, y and z direction. It also include PDG codes. The PDG code is an integer identifying uniquely each type of particle. 
+\\
+\\
+Since this paper focuses on pions, only the data corresponding to the PDG codes 211 (for positive pions) and -211 (for negative pions) were selected. This selection and all subsequent calculations were performed using two pythons scripts specifically developed for this analysis.  
+\\
+\\
+The first script analyzed the entire dataset and computed the amount of matter and anti-matter produced by the collision. It calculated the average number of positive and negative pions across all files using a subsampling method, where each file served as a subsample. 
+\\
+\\
+First the average amount of positive and negative pions per event was calculated for each file. Then using these values, an overall weighted average for both type of pions was conducted (the weigth being the number of events per file). The standard deviation of the averages per event per file was used to estimate the uncertainties of the overall averages.
+\\
+\\
+Additionally, the mean differences between the average number of positive and negative pions per events was calculated for each file, followed by the overall average of these mean differences. The corresponding uncertainty of this overall average was again established using the standard deviation between the mean differences of each file. 
+\\
+\\
+The second python script computed several parameters on the whole data set, such as the total momentum, the pseudo-rapidity and the transversal momentum of each pions particle. These values provide critical information on the spatial distribution and energy levels of the different particles resulting from the collision. Analyzing these parameters is essential to investigate the hypothesis. Significant discrepancies between the results for positive and negative pions would suggest such asymmetry. The different calculations where conducted as follows:
+\\
+The total momentum (p) (in GeV/c) was computed using this formula:
+
+\[p = \sqrt{p_x^2 + p_y^2 + p_z^2} \quad \text{(\cite{Christakoglou2024})}\]
+
+The pseudo-rapidity ($\eta$) (dimensionless) was computed using this formula:
+
+\[\eta = \frac{1}{2} \ln{\left( \frac{p + p_z}{p - p_z} \right)}\quad \text{(\cite{Christakoglou2024})}\]
+
+The transverse momentum (pT) (in GeV/c) was computed using this formula:
+
+\[pT=\sqrt{px^2+py^2+}\quad \text{(\cite{Christakoglou2024})}\]
+
+
+After calculating these parameters for both positive and negative pions accross all files, the code sorted these values into different bins based on pseudorapidity and for transverse momentum. The number of positive and negative pions falling within each ranges was then counted. These counts were normalised per event by dividing them by 5,000,000, the total number of events across all file. Uncertainties for these counts were computed using the Poisson error method, where the square root of the count was divided by the total number of events.
+\\
+\\
+Additionally, the difference between the normalized counts of positive and negative pions within each bin (for both pseudorapidity and transverse momentum) was calculated by subtracting the normalized count of negative pions from that of positive pions. The uncertainties for these differences were determined using the subsampling method, with the 10 files serving as subsamples. To do so, the normalised differences per bins were calculated for each file. The standard deviation across the subsamples was then used to represent the uncertainties for each bins. This approach allowed for the creation of histograms describing the pion distributions as a function of pseudorapidity and transverse momentum, facilitating the comparison between the number of positive and negative pions across these variables. 
+\\

@@ -2,7 +2,7 @@ import numpy as np
 import math
 import os
 
-#this code count the number of Pion positiv negqtiv the diference per fiile with the associate uncertainty per file and normalised
+#this code count the number of Pion positive negative the difference per file with the associate uncertainty per file and normalized
 
 #define empty list to append the results of the different calculations
 averages_positive=[]
@@ -20,7 +20,7 @@ def average_nb_pions(a,b):
         return float("inf")
         
 
-# create a loop to prevent the code to crach when the user enter a wrong input file
+# create a loop to prevent the code to crash when the user enter a wrong input file
 try:
     
     #directory= input("enter your file path")

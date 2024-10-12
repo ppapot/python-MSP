@@ -1,0 +1,24 @@
+\appendix  % Start the appendix
+
+\section*{Appendix}  % Unnumbered title for the appendix
+
+
+\lstdefinestyle{mypython}{
+    language=Python,
+    basicstyle=\ttfamily\footnotesize,  % Font size and type
+    keywordstyle=\color{blue},          % Keywords in blue
+    commentstyle=\color{gray},         % Comments in green
+    stringstyle=\color{red},            % Strings in red
+    showstringspaces=false,             % Don't show spaces in strings
+    frame=single,                       % Frame around the code
+    numbers=left,                       % Line numbers on the left
+    numberstyle=\tiny\color{gray},      % Line number style
+    breaklines=true,                    % Line breaks
+    tabsize=4                           % Tab size
+}
+
+\section{First Python Code}  % Name the section
+\lstinputlisting[style=mypython]{1st_delivrable.py}
+
+\section{Second Python Code}
+\lstinputlisting[style=mypython]{PRA2003_Deliverable_week4.py}

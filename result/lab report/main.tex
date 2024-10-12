@@ -1,0 +1,59 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{lipsum}
+\usepackage[backend=biber,style=apa]{biblatex}
+\addbibresource{bibliography.bib}  % Make sure this is the correct path
+\usepackage{amsmath}
+\usepackage{listings}  % For code listings
+\usepackage{xcolor}    % For syntax highlighting
+\usepackage[utf8]{inputenc}
+\usepackage{subcaption}
+\usepackage{float}  % Add this in the preamble for the [H] specifier
+
+
+
+
+\title{Project report (PRA2003)}
+\author{Your name}
+\date{\today}
+
+\begin{document}
+
+
+
+\begin{titlepage}
+    \begin{center}
+        \includegraphics[width=8cm]{lab report/MSP-logo.jpg} 
+        \vspace{1cm}
+        
+        \textbf{\LARGE Matter--antimatter asymmetry in PYTHIA:}\\
+        \textbf{\LARGE Focus on pion\textbf{}}
+        
+        \vspace{1.5cm}
+        
+        \textbf{\Large Papot Clotilde}
+        \vfill
+        \large Date: \today
+        
+    \end{center}
+\end{titlepage}
+
+\newpage
+\input{introduction}
+
+\input{analysis}
+
+\input{result}
+
+\input{discusion}
+
+
+%\section*{Conclusion}
+%No more than half a page
+
+
+\printbibliography
+
+\end{document}
